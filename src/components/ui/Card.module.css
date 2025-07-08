@@ -1,0 +1,122 @@
+.card {
+    background-color: var(--color-bg-elevated);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-primary);
+    overflow: hidden;
+    transition: all var(--transition-fast);
+    position: relative;
+}
+
+.card.clickable {
+    cursor: pointer;
+}
+
+.card.clickable:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Elevated Card (Notion's default) */
+.elevated {
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-border-primary);
+}
+
+.elevated:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+/* Outline Card */
+.outline {
+    box-shadow: none;
+    border-color: var(--color-border-secondary);
+}
+
+.outline:hover {
+    border-color: var(--color-border-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Ghost Card */
+.ghost {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.ghost:hover {
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-border-primary);
+}
+
+/* Header Section */
+.header {
+    padding: var(--space-6);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border-primary);
+}
+
+.title {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    line-height: var(--line-height-tight);
+}
+
+.subtitle {
+    margin: var(--space-2) 0 0 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-normal);
+}
+
+/* Body Section */
+.body {
+    padding: var(--space-6);
+}
+
+.content {
+    margin: 0;
+    color: var(--color-text-primary);
+    line-height: var(--line-height-normal);
+    font-size: var(--font-size-base);
+}
+
+/* Footer Section */
+.footer {
+    padding: var(--space-4) var(--space-6);
+    border-top: 1px solid var(--color-border-primary);
+    background-color: var(--color-bg-secondary);
+}
+
+.footerText {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-normal);
+}
+
+/* Focus styles for accessibility */
+.card:focus-within {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+
+    .header,
+    .body,
+    .footer {
+        padding: var(--space-4);
+    }
+
+    .header {
+        padding-bottom: var(--space-3);
+    }
+
+    .footer {
+        padding-top: var(--space-3);
+    }
+}

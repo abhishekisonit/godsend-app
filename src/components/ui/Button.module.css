@@ -1,0 +1,163 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-family-sans);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-decoration: none;
+    white-space: nowrap;
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.button:focus {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+}
+
+/* Primary Button (Notion Blue) */
+.primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-inverse);
+    box-shadow: var(--shadow-sm);
+}
+
+.primary:hover:not(:disabled) {
+    background-color: var(--color-primary-dark);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.primary:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Secondary Button */
+.secondary {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.secondary:hover:not(:disabled) {
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-border-secondary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.secondary:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Ghost Button */
+.ghost {
+    background-color: transparent;
+    color: var(--color-text-primary);
+    border: 1px solid transparent;
+}
+
+.ghost:hover:not(:disabled) {
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-border-primary);
+}
+
+.ghost:active:not(:disabled) {
+    background-color: var(--color-bg-tertiary);
+}
+
+/* Danger Button */
+.danger {
+    background-color: var(--color-error);
+    color: var(--color-text-inverse);
+    box-shadow: var(--shadow-sm);
+}
+
+.danger:hover:not(:disabled) {
+    background-color: #dc2626;
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.danger:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Success Button */
+.success {
+    background-color: var(--color-success);
+    color: var(--color-text-inverse);
+    box-shadow: var(--shadow-sm);
+}
+
+.success:hover:not(:disabled) {
+    background-color: #059669;
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.success:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Sizes */
+.sm {
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--font-size-sm);
+    min-height: 28px;
+}
+
+.md {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-base);
+    min-height: 36px;
+}
+
+.lg {
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--font-size-lg);
+    min-height: 44px;
+}
+
+/* Loading state */
+.button:disabled:not(.disabled) {
+    position: relative;
+    color: transparent;
+}
+
+.button:disabled:not(.disabled)::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
