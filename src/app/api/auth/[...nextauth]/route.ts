@@ -1,10 +1,10 @@
-import NextAuth from 'next-auth'
+import NextAuth, { AuthOptions } from 'next-auth'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { prisma } from '@/lib/prisma'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { verifyPassword } from '@/lib/auth'
 
-const handler = NextAuth({
+export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma),
     providers: [
         CredentialsProvider({
@@ -52,26 +52,28 @@ const handler = NextAuth({
         })
     ],
     session: {
-        strategy: 'jwt'
+        strategy: 'jwt' as const
     },
     pages: {
         signIn: '/auth/signin',
         error: '/auth/error',
     },
     callbacks: {
-        async jwt({ token, user }) {
+        async jwt({ token, user }: { token: any; user: any }) {
             if (user) {
                 token.id = user.id
             }
             return token
         },
-        async session({ session, token }) {
+        async session({ session, token }: { session: any; token: any }) {
             if (token && session.user) {
                 (session.user as any).id = token.id as string
             }
             return session
         }
     }
-})
+}
+
+const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST } 

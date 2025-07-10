@@ -41,6 +41,7 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+// Enhanced User model for Godsend platform
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -48,8 +49,30 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?   // Hashed password for credentials authentication
+  
+  // Godsend-specific fields
+  phone         String?
+  location      String?   // Current city in Country B
+  homeCountry   String?   // Country A
+  isVerified    Boolean   @default(false)
+  rating        Decimal?  @db.Decimal(3,2) // Average rating (0.00-5.00)
+  totalDeliveries Int     @default(0)
+  totalRequests  Int      @default(0)
+  bio           String?   @db.Text
+  preferences   Json?     // User preferences as JSON
+  
+  // NextAuth relationships
   accounts      Account[]
   sessions      Session[]
+  
+  // Godsend relationships
+  requests      Request[] @relation("UserRequests")     // Requests created by user
+  fulfillments  Request[] @relation("UserFulfillments") // Requests fulfilled by user
+  messages      Message[] // Messages sent by user
+  
+  // Timestamps
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }
 
 model VerificationToken {
@@ -58,4 +81,58 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+// Godsend Platform Models
+model Request {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  category    String   // Food, Medicine, Clothing, Electronics, Books, Other
+  quantity    Int
+  estimatedValue Decimal? @db.Decimal(10,2)
+  
+  // Source location (Country A)
+  sourceCity  String
+  sourceShop  String?
+  sourceAddress String?
+  alternativeSource String?
+  
+  // Delivery location (Country B)
+  deliveryCity String
+  meetupArea   String?
+  dueDate      DateTime
+  
+  // Status tracking
+  status       RequestStatus @default(OPEN)
+  
+  // Relationships
+  requesterId  String
+  requester    User     @relation("UserRequests", fields: [requesterId], references: [id])
+  fulfillerId  String?
+  fulfiller    User?    @relation("UserFulfillments", fields: [fulfillerId], references: [id])
+  
+  // Timestamps
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  // Optional: Messages between users
+  messages     Message[]
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  content   String
+  requestId String
+  request   Request  @relation(fields: [requestId], references: [id])
+  senderId  String
+  sender    User     @relation(fields: [senderId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+enum RequestStatus {
+  OPEN
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
 }
