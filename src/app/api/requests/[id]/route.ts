@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
+import { authenticateRequest } from '@/lib/auth-middleware';
 
 // Validation schemas
 const updateRequestSchema = z.object({
@@ -26,14 +27,22 @@ export async function GET(
     { params }: { params: { id: string } }
 ) {
     try {
-        const session = await getServerSession(authOptions);
-        if (!session?.user?.email) {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        // Use the new authentication middleware
+        const authenticatedRequest = await authenticateRequest(request);
+
+        if (!authenticatedRequest) {
+            return NextResponse.json({
+                error: 'Unauthorized',
+                message: 'Please authenticate using NextAuth session or valid API key'
+            }, { status: 401 });
         }
+
+        const user = authenticatedRequest.user!;
+        console.log('Authenticated user for GET request:', user.email);
 
         const requestId = params.id;
 
-        const request = await prisma.request.findUnique({
+        const requestData = await prisma.request.findUnique({
             where: { id: requestId },
             include: {
                 requester: {
@@ -80,11 +89,11 @@ export async function GET(
             }
         });
 
-        if (!request) {
+        if (!requestData) {
             return NextResponse.json({ error: 'Request not found' }, { status: 404 });
         }
 
-        return NextResponse.json(request);
+        return NextResponse.json(requestData);
 
     } catch (error) {
         console.error('Error fetching request:', error);
@@ -98,10 +107,18 @@ export async function PUT(
     { params }: { params: { id: string } }
 ) {
     try {
-        const session = await getServerSession(authOptions);
-        if (!session?.user?.email) {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        // Use the new authentication middleware
+        const authenticatedRequest = await authenticateRequest(request);
+
+        if (!authenticatedRequest) {
+            return NextResponse.json({
+                error: 'Unauthorized',
+                message: 'Please authenticate using NextAuth session or valid API key'
+            }, { status: 401 });
         }
+
+        const user = authenticatedRequest.user!;
+        console.log('Authenticated user for PUT:', user.email);
 
         const requestId = params.id;
         const body = await request.json();
@@ -110,11 +127,11 @@ export async function PUT(
         const validatedData = updateRequestSchema.parse(body);
 
         // Get user from database
-        const user = await prisma.user.findUnique({
-            where: { email: session.user.email }
+        const dbUser = await prisma.user.findUnique({
+            where: { email: user.email }
         });
 
-        if (!user) {
+        if (!dbUser) {
             return NextResponse.json({ error: 'User not found' }, { status: 404 });
         }
 
@@ -128,7 +145,7 @@ export async function PUT(
             return NextResponse.json({ error: 'Request not found' }, { status: 404 });
         }
 
-        if (existingRequest.requesterId !== user.id) {
+        if (existingRequest.requesterId !== dbUser.id) {
             return NextResponse.json({ error: 'Not authorized to update this request' }, { status: 403 });
         }
 
@@ -176,19 +193,27 @@ export async function DELETE(
     { params }: { params: { id: string } }
 ) {
     try {
-        const session = await getServerSession(authOptions);
-        if (!session?.user?.email) {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        // Use the new authentication middleware
+        const authenticatedRequest = await authenticateRequest(request);
+
+        if (!authenticatedRequest) {
+            return NextResponse.json({
+                error: 'Unauthorized',
+                message: 'Please authenticate using NextAuth session or valid API key'
+            }, { status: 401 });
         }
+
+        const user = authenticatedRequest.user!;
+        console.log('Authenticated user for DELETE:', user.email);
 
         const requestId = params.id;
 
         // Get user from database
-        const user = await prisma.user.findUnique({
-            where: { email: session.user.email }
+        const dbUser = await prisma.user.findUnique({
+            where: { email: user.email }
         });
 
-        if (!user) {
+        if (!dbUser) {
             return NextResponse.json({ error: 'User not found' }, { status: 404 });
         }
 
@@ -202,7 +227,7 @@ export async function DELETE(
             return NextResponse.json({ error: 'Request not found' }, { status: 404 });
         }
 
-        if (existingRequest.requesterId !== user.id) {
+        if (existingRequest.requesterId !== dbUser.id) {
             return NextResponse.json({ error: 'Not authorized to cancel this request' }, { status: 403 });
         }
 
@@ -219,7 +244,7 @@ export async function DELETE(
 
         // Update user's total requests count
         await prisma.user.update({
-            where: { id: user.id },
+            where: { id: dbUser.id },
             data: { totalRequests: { decrement: 1 } }
         });
 

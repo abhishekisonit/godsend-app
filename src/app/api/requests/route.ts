@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
+import { authenticateRequest } from '@/lib/auth-middleware';
 
 // Validation schemas
 const createRequestSchema = z.object({
@@ -31,15 +32,18 @@ const getRequestsSchema = z.object({
 // GET /api/requests - List requests with filters
 export async function GET(request: NextRequest) {
     try {
-        const session = await getServerSession(authOptions);
-        console.log('Session in GET /api/requests:', session);
+        // Use the new authentication middleware
+        const authenticatedRequest = await authenticateRequest(request);
 
-        if (!session?.user?.email) {
+        if (!authenticatedRequest) {
             return NextResponse.json({
                 error: 'Unauthorized',
-                debug: { session: session, user: session?.user }
+                message: 'Please authenticate using NextAuth session or valid API key'
             }, { status: 401 });
         }
+
+        const user = authenticatedRequest.user!;
+        console.log('Authenticated user:', user.email);
 
         const { searchParams } = new URL(request.url);
         const queryParams = Object.fromEntries(searchParams.entries());
@@ -113,15 +117,18 @@ export async function GET(request: NextRequest) {
 // POST /api/requests - Create new request
 export async function POST(request: NextRequest) {
     try {
-        const session = await getServerSession(authOptions);
-        console.log('Session in POST /api/requests:', session);
+        // Use the new authentication middleware
+        const authenticatedRequest = await authenticateRequest(request);
 
-        if (!session?.user?.email) {
+        if (!authenticatedRequest) {
             return NextResponse.json({
                 error: 'Unauthorized',
-                debug: { session: session, user: session?.user }
+                message: 'Please authenticate using NextAuth session or valid API key'
             }, { status: 401 });
         }
+
+        const user = authenticatedRequest.user!;
+        console.log('Authenticated user for POST:', user.email);
 
         const body = await request.json();
 
@@ -129,11 +136,11 @@ export async function POST(request: NextRequest) {
         const validatedData = createRequestSchema.parse(body);
 
         // Get user from database
-        const user = await prisma.user.findUnique({
-            where: { email: session.user.email }
+        const dbUser = await prisma.user.findUnique({
+            where: { email: user.email }
         });
 
-        if (!user) {
+        if (!dbUser) {
             return NextResponse.json({ error: 'User not found' }, { status: 404 });
         }
 
@@ -142,7 +149,7 @@ export async function POST(request: NextRequest) {
             data: {
                 ...validatedData,
                 dueDate: new Date(validatedData.dueDate),
-                requesterId: user.id,
+                requesterId: dbUser.id,
             },
             include: {
                 requester: {
@@ -158,7 +165,7 @@ export async function POST(request: NextRequest) {
 
         // Update user's total requests count
         await prisma.user.update({
-            where: { id: user.id },
+            where: { id: dbUser.id },
             data: { totalRequests: { increment: 1 } }
         });
 
