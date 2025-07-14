@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Frontend Boilerplate - Notion-inspired Design",
-  description: "A modern Next.js app with Notion-inspired design system using Chakra UI + CSS Modules",
+  title: "Godsend - Connect with People Who Can Help",
+  description: "Connect with people who can help you get what you need. Find requests from your community or create your own.",
 };
 
 export default function RootLayout({
@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable}`} style={{ fontFamily: 'var(--font-family-sans)' }}>
+      <body className={`${geistSans.variable} ${geistMono.variable}`} style={{ fontFamily: 'var(--font-family-sans)' }} suppressHydrationWarning>
         <Provider>
           <AuthProvider>
             <Box minH="100vh" display="flex" flexDirection="column">

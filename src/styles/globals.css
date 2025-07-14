@@ -40,6 +40,16 @@
     --color-error-light: #ef4444;
     --color-error-bg: #fef2f2;
 
+    /* Status Colors - Four unique colors for request statuses */
+    --color-status-open: #059669;
+    /* Green - Available for fulfillment */
+    --color-status-in-progress: #2563eb;
+    /* Blue - Being worked on */
+    --color-status-completed: var(--color-gray-500);
+    /* Green - Successfully completed */
+    --color-status-cancelled: #dc2626;
+    /* Red - Cancelled/terminated */
+
     /* Text Colors */
     --color-text-primary: var(--color-gray-900);
     --color-text-secondary: var(--color-gray-700);
@@ -107,6 +117,7 @@
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
 
+    --line-height-none: 1;
     --line-height-tight: 1.25;
     --line-height-normal: 1.5;
     --line-height-relaxed: 1.75;

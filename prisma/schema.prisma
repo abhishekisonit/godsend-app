@@ -118,6 +118,14 @@ model Request {
   
   // Optional: Messages between users
   messages     Message[]
+
+  // Indexes for better performance
+  @@index([status])
+  @@index([category])
+  @@index([deliveryCity])
+  @@index([createdAt])
+  @@index([requesterId])
+  @@index([fulfillerId])
 }
 
 model Message {

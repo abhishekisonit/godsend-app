@@ -112,4 +112,32 @@ export async function POST(request: NextRequest) {
             error: 'Internal server error'
         }, { status: 500 });
     }
+}
+
+// DELETE /api/test-auth - Invalidate session token (for cleanup)
+export async function DELETE(request: NextRequest) {
+    try {
+        const apiKey = request.headers.get('x-api-key');
+
+        if (!apiKey) {
+            return NextResponse.json({
+                error: 'No API key provided'
+            }, { status: 400 });
+        }
+
+        // For development purposes, we'll just log the invalidation
+        // In a real implementation, you might want to store invalidated tokens
+        console.log('🔐 [AUTH] Session token invalidated for cleanup');
+
+        return NextResponse.json({
+            message: 'Session invalidated successfully',
+            timestamp: new Date().toISOString()
+        });
+
+    } catch (error) {
+        console.error('Error in test-auth DELETE:', error);
+        return NextResponse.json({
+            error: 'Internal server error'
+        }, { status: 500 });
+    }
 } 

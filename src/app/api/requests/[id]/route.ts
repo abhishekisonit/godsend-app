@@ -19,6 +19,7 @@ const updateRequestSchema = z.object({
     deliveryCity: z.string().min(1, 'Delivery city is required').optional(),
     meetupArea: z.string().optional(),
     dueDate: z.string().datetime('Invalid date format').optional(),
+    status: z.enum(['OPEN', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED']).optional(),
 });
 
 // GET /api/requests/[id] - Get specific request
@@ -149,8 +150,9 @@ export async function PUT(
             return NextResponse.json({ error: 'Not authorized to update this request' }, { status: 403 });
         }
 
-        // Only allow updates if request is still open
-        if (existingRequest.status !== 'OPEN') {
+        // Allow status updates regardless of current status
+        // For non-status updates, only allow if request is still open
+        if (validatedData.status === undefined && existingRequest.status !== 'OPEN') {
             return NextResponse.json({ error: 'Cannot update request that is not open' }, { status: 400 });
         }
 

@@ -15,6 +15,10 @@
     "db:reset": "tsx scripts/setup-database.ts reset",
     "db:status": "tsx scripts/setup-database.ts status",
     "create-test-users": "tsx scripts/create-test-users.ts",
+    "create-sample-requests": "tsx scripts/create-sample-requests.ts",
+    "update-request-statuses": "tsx scripts/update-request-statuses.ts",
+    "delete-all-requests": "tsx scripts/delete-all-requests.ts",
+    "generate-api-key": "tsx scripts/generate-api-key.ts",
     "db:push": "docker run --rm -it --network prisma-network -v ${PWD}:/app -w /app -e DATABASE_URL='postgresql://postgres:prisma@postgres_db:5432/postgres?schema=public' node:18 npx prisma db push",
     "db:generate": "npx prisma generate",
     "db:studio": "docker run --rm -it --network prisma-network -v ${PWD}:/app -w /app -p 5555:5555 node:18 npx prisma studio --hostname 0.0.0.0"
