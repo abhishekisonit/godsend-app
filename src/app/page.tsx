@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Container, Heading, Text, VStack } from '@chakra-ui/react';
+import { Container, Heading, Text, VStack } from '@chakra-ui/react';
 import RequestGrid from '@/components/RequestGrid';
 import styles from './page.module.css';
 

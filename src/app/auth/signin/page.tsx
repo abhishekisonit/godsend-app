@@ -107,7 +107,7 @@ export default function SignInPage() {
 
         <Box textAlign="center">
           <Text fontSize="sm" color="gray.600" mb={2}>
-            Don't have an account?
+            Don&apos;t have an account?
           </Text>
           <Button
             variant="ghost"

@@ -5,7 +5,6 @@ import {
   FaBox,
   FaMoneyBillWave,
   FaUser,
-  FaComments,
 } from 'react-icons/fa';
 import styles from './RequestCard.module.css';
 

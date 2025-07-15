@@ -14,8 +14,6 @@ import {
   Heading,
   Flex,
   Select,
-  ButtonGroup,
-  IconButton,
   Portal,
   createListCollection,
 } from '@chakra-ui/react';
@@ -135,7 +133,7 @@ export default function RequestGrid({ showFilters = true }: RequestGridProps) {
 
   useEffect(() => {
     fetchRequests(currentPage);
-  }, [filters, currentPage]);
+  }, [filters, currentPage, fetchRequests]);
 
   const handleFilterChange = (key: string, value: string) => {
     setFilters(prev => ({
