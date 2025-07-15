@@ -1,14 +1,8 @@
-"use client";
+'use client';
 
-import {
-  Box,
-  Container,
-  Heading,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import RequestGrid from "@/components/RequestGrid";
-import styles from "./page.module.css";
+import { Box, Container, Heading, Text, VStack } from '@chakra-ui/react';
+import RequestGrid from '@/components/RequestGrid';
+import styles from './page.module.css';
 
 export default function Home() {
   return (
@@ -20,8 +14,8 @@ export default function Home() {
             Godsend
           </Heading>
           <Text fontSize="lg" color="gray.600" maxW="2xl">
-            Connect with people who can help you get what you need.
-            Find requests from your community or create your own.
+            Connect with people who can help you get what you need. Find
+            requests from your community or create your own.
           </Text>
         </VStack>
 

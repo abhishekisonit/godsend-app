@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcryptjs';
 
 /**
  * Hash a password using bcrypt
@@ -6,8 +6,8 @@ import bcrypt from 'bcryptjs'
  * @returns Hashed password
  */
 export async function hashPassword(password: string): Promise<string> {
-    const saltRounds = 12 // Recommended for production
-    return bcrypt.hash(password, saltRounds)
+  const saltRounds = 12; // Recommended for production
+  return bcrypt.hash(password, saltRounds);
 }
 
 /**
@@ -16,8 +16,11 @@ export async function hashPassword(password: string): Promise<string> {
  * @param hashedPassword - Hashed password from database
  * @returns True if password matches, false otherwise
  */
-export async function verifyPassword(password: string, hashedPassword: string): Promise<boolean> {
-    return bcrypt.compare(password, hashedPassword)
+export async function verifyPassword(
+  password: string,
+  hashedPassword: string
+): Promise<boolean> {
+  return bcrypt.compare(password, hashedPassword);
 }
 
 /**
@@ -26,13 +29,14 @@ export async function verifyPassword(password: string, hashedPassword: string): 
  * @returns Random password string
  */
 export function generateSecurePassword(length: number = 12): string {
-    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*'
-    let password = ''
+  const charset =
+    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
+  let password = '';
 
-    for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * charset.length)
-        password += charset[randomIndex]
-    }
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    password += charset[randomIndex];
+  }
 
-    return password
-} 
+  return password;
+}

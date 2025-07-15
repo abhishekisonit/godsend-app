@@ -5,6 +5,7 @@ A **Notion-inspired design system** using **Chakra UI components** + **CSS Modul
 ## 🎯 Why This Hybrid Approach?
 
 ### **Benefits:**
+
 1. **Chakra's Functionality**: Built-in accessibility, state management, responsive design
 2. **Custom Styling**: Our CSS Modules for precise Notion-inspired design
 3. **Familiar API**: Use Chakra's prop system and patterns
@@ -12,6 +13,7 @@ A **Notion-inspired design system** using **Chakra UI components** + **CSS Modul
 5. **Flexibility**: Choose the right approach for each component
 
 ### **Perfect Use Cases:**
+
 - **Simple components**: Our custom Button, Card, Input with Chakra functionality
 - **Complex components**: Use Chakra's Breadcrumbs, DatePickers, Modals, etc.
 - **Mixed approach**: Combine both for optimal results
@@ -76,8 +78,10 @@ A **Notion-inspired design system** using **Chakra UI components** + **CSS Modul
 
 ```css
 --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
---shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
---shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+--shadow-md:
+  0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+--shadow-lg:
+  0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 ```
 
 ## 🧩 Components
@@ -100,8 +104,8 @@ import { Button } from '@/components/ui'
 </Button>
 
 // All Chakra Button props work
-<Button 
-  variant="primary" 
+<Button
+  variant="primary"
   onClick={handleClick}
   leftIcon={<Icon />}
   rightIcon={<ArrowIcon />}
@@ -111,6 +115,7 @@ import { Button } from '@/components/ui'
 ```
 
 **Features:**
+
 - Notion-style hover effects with subtle lift
 - Chakra's loading state with spinner
 - Chakra's focus management for accessibility
@@ -125,15 +130,15 @@ import { Button } from '@/components/ui'
 import { Card } from '@/components/ui'
 
 // Simple usage with our props
-<Card 
+<Card
   title="Welcome"
   content="This is a simple card with convenient props."
   footer="Last updated 2 hours ago"
 />
 
 // Custom layout with Chakra props
-<Card 
-  variant="elevated" 
+<Card
+  variant="elevated"
   onClick={handleClick}
   _hover={{ transform: 'scale(1.02)' }}
   transition="transform 0.2s"
@@ -146,6 +151,7 @@ import { Card } from '@/components/ui'
 ```
 
 **Features:**
+
 - Flexible content structure
 - Chakra's Box component with our styling
 - All Chakra Box props available
@@ -161,14 +167,14 @@ import { Card } from '@/components/ui'
 import { Input } from '@/components/ui'
 
 // Our custom variants
-<Input 
+<Input
   placeholder="Default input"
   variant="default"
   size="md"
 />
 
 // All Chakra Input props work
-<Input 
+<Input
   placeholder="With icon"
   leftElement={<SearchIcon />}
   rightElement={<ClearIcon />}
@@ -176,6 +182,7 @@ import { Input } from '@/components/ui'
 ```
 
 **Features:**
+
 - Focus ring with brand color
 - Validation states
 - Autofill styling
@@ -186,8 +193,8 @@ import { Input } from '@/components/ui'
 ### Basic Layout
 
 ```tsx
-import { Button, Card, Input } from '@/components/ui'
-import { VStack, HStack, Text, Badge } from '@chakra-ui/react'
+import { Button, Card, Input } from '@/components/ui';
+import { VStack, HStack, Text, Badge } from '@chakra-ui/react';
 
 function MyComponent() {
   return (
@@ -204,17 +211,17 @@ function MyComponent() {
         </VStack>
       </Card>
     </div>
-  )
+  );
 }
 ```
 
 ### Mixed Components
 
 ```tsx
-import { Button, Card } from '@/components/ui'
-import { 
-  Breadcrumb, 
-  BreadcrumbItem, 
+import { Button, Card } from '@/components/ui';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
   BreadcrumbLink,
   DatePicker,
   Modal,
@@ -222,8 +229,8 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter
-} from '@chakra-ui/react'
+  ModalFooter,
+} from '@chakra-ui/react';
 
 function MyPage() {
   return (
@@ -232,21 +239,17 @@ function MyPage() {
       <Card variant="elevated" title="Welcome">
         <Button variant="primary">Action</Button>
       </Card>
-      
+
       {/* Chakra components */}
       <Breadcrumb>
         <BreadcrumbItem>
           <BreadcrumbLink href="#">Home</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
-      
-      <DatePicker 
-        value={date} 
-        onChange={setDate}
-        isClearable
-      />
+
+      <DatePicker value={date} onChange={setDate} isClearable />
     </div>
-  )
+  );
 }
 ```
 
@@ -260,10 +263,10 @@ Edit `src/app/globals.css`:
 :root {
   /* Change primary color */
   --color-primary: #your-brand-color;
-  
+
   /* Change background */
   --color-bg-primary: #your-bg-color;
-  
+
   /* Add custom colors */
   --color-accent: #your-accent-color;
 }
@@ -272,26 +275,28 @@ Edit `src/app/globals.css`:
 ### Adding New Components
 
 1. **Create component file**:
+
 ```tsx
 // src/components/ui/NewComponent.tsx
-import { Box, type BoxProps } from '@chakra-ui/react'
-import styles from './NewComponent.module.css'
+import { Box, type BoxProps } from '@chakra-ui/react';
+import styles from './NewComponent.module.css';
 
 interface NewComponentProps extends BoxProps {
-  variant?: 'default' | 'custom'
+  variant?: 'default' | 'custom';
 }
 
-export function NewComponent({ variant = 'default', ...props }: NewComponentProps) {
+export function NewComponent({
+  variant = 'default',
+  ...props
+}: NewComponentProps) {
   return (
-    <Box 
-      className={`${styles.component} ${styles[variant]}`}
-      {...props}
-    />
-  )
+    <Box className={`${styles.component} ${styles[variant]}`} {...props} />
+  );
 }
 ```
 
 2. **Create CSS module**:
+
 ```css
 /* src/components/ui/NewComponent.module.css */
 .component {
@@ -312,9 +317,10 @@ export function NewComponent({ variant = 'default', ...props }: NewComponentProp
 ```
 
 3. **Export from index**:
+
 ```tsx
 // src/components/ui/index.ts
-export { NewComponent } from './NewComponent'
+export { NewComponent } from './NewComponent';
 ```
 
 ## 📱 Responsive Design
@@ -353,6 +359,7 @@ The design system is mobile-first:
 ## 🚀 Best Practices
 
 ### 1. Use CSS Variables
+
 ```css
 /* ✅ Good */
 .button {
@@ -368,10 +375,11 @@ The design system is mobile-first:
 ```
 
 ### 2. Leverage Chakra Props
+
 ```tsx
 /* ✅ Good */
-<Button 
-  variant="primary" 
+<Button
+  variant="primary"
   isLoading={loading}
   leftIcon={<Icon />}
   onClick={handleClick}
@@ -380,7 +388,7 @@ The design system is mobile-first:
 </Button>
 
 /* ❌ Avoid */
-<button 
+<button
   className={styles.button}
   disabled={loading}
   onClick={handleClick}
@@ -390,6 +398,7 @@ The design system is mobile-first:
 ```
 
 ### 3. Component Composition
+
 ```tsx
 /* ✅ Good */
 <Card>
@@ -405,18 +414,21 @@ The design system is mobile-first:
 ## 🎯 When to Use Each Approach
 
 ### **Use Our Custom Components For:**
+
 - ✅ Simple UI elements (Button, Card, Input)
 - ✅ Consistent design language
 - ✅ Notion-inspired styling
 - ✅ Quick development
 
 ### **Use Chakra Components For:**
+
 - ✅ Complex functionality (Breadcrumbs, DatePickers, Modals)
 - ✅ Advanced accessibility needs
 - ✅ Form validation and state management
 - ✅ Rapid prototyping
 
 ### **Use Both Together For:**
+
 - ✅ Complete applications
 - ✅ Professional projects
 - ✅ Complex user interfaces
@@ -425,12 +437,14 @@ The design system is mobile-first:
 ## 🔄 Comparison
 
 ### This Hybrid Approach vs Pure CSS Modules:
+
 - ✅ **More functionality**: Chakra's built-in features
 - ✅ **Better accessibility**: Chakra's a11y features
 - ✅ **Faster development**: Less custom code needed
 - ✅ **Consistent API**: All components use Chakra patterns
 
 ### This Hybrid Approach vs Pure Chakra UI:
+
 - ✅ **Custom design**: Our Notion-inspired styling
 - ✅ **Better control**: CSS Modules for precise styling
 - ✅ **Design consistency**: Our design tokens
@@ -447,4 +461,4 @@ The design system is mobile-first:
 7. **Developer Experience**: Familiar patterns with custom design
 8. **Maintainability**: Clear separation of concerns
 
-This hybrid approach gives you **90% of the benefits** with **optimal flexibility** - perfect for real-world projects! 
+This hybrid approach gives you **90% of the benefits** with **optimal flexibility** - perfect for real-world projects!

@@ -1,166 +1,166 @@
 .requestCard {
-    background-color: var(--color-bg-elevated);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--color-border-primary);
-    overflow: hidden;
-    transition: all var(--transition-fast);
-    position: relative;
-    cursor: pointer;
+  background-color: var(--color-bg-elevated);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-primary);
+  overflow: hidden;
+  transition: all var(--transition-fast);
+  position: relative;
+  cursor: pointer;
 }
 
 .requestCard:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 .cardContent {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: var(--space-3);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-3);
 }
 
 .statusSection {
-    display: flex;
-    align-items: flex-start;
+  display: flex;
+  align-items: flex-start;
 }
 
 .categoryTimeSection {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: var(--space-1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
 }
 
 .statusBadge {
-    font-size: 28px;
-    padding: var(--space-1) var(--space-2);
-    border-radius: var(--radius-sm);
-    font-weight: var(--font-weight-medium);
-    color: white;
+  font-size: 28px;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-weight-medium);
+  color: white;
 }
 
 .statusOpen {
-    background-color: var(--color-status-open);
+  background-color: var(--color-status-open);
 }
 
 .statusInProgress {
-    background-color: var(--color-status-in-progress);
+  background-color: var(--color-status-in-progress);
 }
 
 .statusCompleted {
-    background-color: var(--color-status-completed);
+  background-color: var(--color-status-completed);
 }
 
 .statusCancelled {
-    background-color: var(--color-status-cancelled);
+  background-color: var(--color-status-cancelled);
 }
 
 .categoryText {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-secondary);
-    font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
 }
 
 .createdAt {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-secondary);
-    text-align: right;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-align: right;
 }
 
 .title {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-text-primary);
-    line-height: var(--line-height-tight);
-    margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+  margin: 0;
 }
 
 .description {
-    color: var(--color-text-secondary);
-    line-height: var(--line-height-normal);
-    font-size: var(--font-size-base);
-    margin: 0;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+  font-size: var(--font-size-base);
+  margin: 0;
 }
 
 .detailsGrid {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 .detailRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--space-3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
 }
 
 .detailItem {
-    display: flex;
-    align-items: center;
-    gap: var(--space-1);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
 }
 
 .detailText {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-secondary);
-    margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
 }
 
 .locationSection {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .locationValue {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-primary);
-    margin: 0;
-    text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  margin: 0;
+  text-align: center;
 }
 
 .locationCircleFilled {
-    background-color: var(--color-primary);
-    border-color: var(--color-primary);
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 .locationLine {
-    flex-grow: 1;
-    height: 1px;
-    background-color: var(--color-border-primary);
+  flex-grow: 1;
+  height: 1px;
+  background-color: var(--color-border-primary);
 }
 
 .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: var(--space-2);
-    border-top: 1px solid var(--color-border-primary);
-    gap: var(--space-3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border-primary);
+  gap: var(--space-3);
 }
 
 .footerItem {
-    display: flex;
-    align-items: center;
-    gap: var(--space-1);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
 }
 
 .footerText {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-secondary);
-    margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
 }
 
 .requestId {
-    font-size: var(--font-size-xs);
-    color: var(--color-text-tertiary);
-    margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  margin: 0;
 }

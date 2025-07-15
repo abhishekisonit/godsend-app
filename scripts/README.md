@@ -34,10 +34,12 @@ NODE_ENV=production npm run create-sample-requests  # ❌ BLOCKED
 ## Available Scripts
 
 ### Database Setup
+
 - `setup-database.ts` - Initialize and manage the database
 - `create-test-users.ts` - Create test users for development
 
 ### Sample Data
+
 - `create-sample-requests.ts` - Create sample requests for testing
 - `update-request-statuses.ts` - Update request statuses for UI testing
 - `delete-all-requests.ts` - Delete all requests for testing
@@ -50,6 +52,7 @@ NODE_ENV=production npm run create-sample-requests  # ❌ BLOCKED
 This script creates sample requests via the API to populate your database with test data.
 
 #### Prerequisites
+
 1. Make sure your development server is running (`npm run dev`)
 2. The database should be set up and running
 3. Ensure you're in development environment
@@ -59,6 +62,7 @@ This script creates sample requests via the API to populate your database with t
 #### Running the Script
 
 **Simple usage (automatic authentication):**
+
 ```bash
 # Create 50 sample requests (default)
 npm run create-sample-requests
@@ -68,6 +72,7 @@ npm run create-sample-requests 25
 ```
 
 **What the script does automatically:**
+
 1. ✅ Verifies test users exist (requires `npm run create-test-users` first)
 2. ✅ Authenticates using test credentials (`testuser1@example.com` / `password123`)
 3. ✅ Generates API key automatically
@@ -92,12 +97,14 @@ The script generates realistic sample requests with:
 #### Output
 
 The script provides detailed feedback:
+
 - Progress updates for each request
 - Summary of successful vs failed requests
 - Detailed error messages for failed requests
 - Total execution time
 
 #### Example Output
+
 ```
 ⚠️  DEVELOPMENT ONLY: This script creates test data and should not be used in production!
 📖 See README.md for production exclusion guidelines.
@@ -135,6 +142,7 @@ Failed: 2
 This script updates existing requests with different statuses to create variety for UI testing.
 
 #### Prerequisites
+
 1. Make sure your development server is running (`npm run dev`)
 2. The database should be set up and running
 3. Ensure you're in development environment
@@ -149,6 +157,7 @@ npm run update-request-statuses
 ```
 
 **What the script does:**
+
 1. ✅ Authenticates using test credentials
 2. ✅ Fetches all existing requests
 3. ✅ Updates request statuses with realistic distribution:
@@ -163,6 +172,7 @@ npm run update-request-statuses
 #### Status Distribution
 
 The script creates a realistic distribution of request statuses:
+
 - **OPEN**: 40% - New requests waiting for fulfillment
 - **IN_PROGRESS**: 30% - Requests being actively fulfilled
 - **COMPLETED**: 20% - Successfully completed requests
@@ -171,6 +181,7 @@ The script creates a realistic distribution of request statuses:
 This distribution provides good coverage for testing all UI states and filters.
 
 #### Example Output
+
 ```
 🚀 Starting request status updates for UI testing...
 🔐 Authenticating with email: testuser1@example.com
@@ -212,6 +223,7 @@ Status Distribution:
 This script deletes all existing requests from the database. Useful for resetting the database state during development and testing.
 
 #### Prerequisites
+
 1. Make sure your development server is running (`npm run dev`)
 2. The database should be set up and running
 3. Ensure you're in development environment
@@ -219,12 +231,13 @@ This script deletes all existing requests from the database. Useful for resettin
 
 #### Running the Script
 
-   ```bash
+```bash
 # Delete all requests (with confirmation)
 npm run delete-all-requests
 ```
 
 **What the script does:**
+
 1. ✅ Authenticates using test credentials
 2. ✅ Fetches all existing requests
 3. ✅ Shows confirmation warning with 5-second delay
@@ -249,6 +262,7 @@ npm run delete-all-requests
 - **Performance Testing**: Clear database for load tests
 
 #### Example Output
+
 ```
 🚀 Starting deletion of all requests...
 🔐 Authenticating with email: testuser1@example.com
@@ -290,7 +304,7 @@ Failed to delete: 2
 
 Here's the complete workflow for managing test data:
 
-   ```bash
+```bash
 # 1. Set up database and users
 npm run db:setup
 npm run create-test-users
@@ -314,6 +328,7 @@ This gives you complete control over your test data lifecycle!
 #### Error Handling
 
 The script handles various error scenarios:
+
 - Network connectivity issues
 - Authentication failures
 - Invalid data format
@@ -324,6 +339,7 @@ Failed requests are logged but don't stop the script execution.
 #### Customization
 
 You can modify the script to:
+
 - Add more categories or items
 - Change the source/delivery cities
 - Adjust pricing ranges
@@ -335,18 +351,22 @@ The script is designed to be easily extensible for different testing scenarios.
 ## Security Considerations
 
 ### Test Credentials
+
 The script uses hardcoded test credentials:
+
 - Email: `test@example.com`
 - Password: `password123`
 
 **Never use these credentials in production!**
 
 ### API Key Security
+
 - API keys are generated for testing only
 - Keys expire after 24 hours
 - Keys should never be committed to version control
 
 ### Environment Variables
+
 - No sensitive environment variables required
 - Script handles authentication internally
 - Safe for development environments
@@ -356,16 +376,19 @@ The script uses hardcoded test credentials:
 ### Common Issues
 
 1. **Server not running:**
+
    ```bash
    npm run dev  # Start development server first
    ```
 
 2. **Database not set up:**
+
    ```bash
    npm run db:setup  # Set up database first
    ```
 
 3. **Authentication failed:**
+
    ```bash
    npm run create-test-users  # Create test users first
    ```
@@ -379,8 +402,9 @@ The script uses hardcoded test credentials:
 ### Debug Mode
 
 For detailed debugging, check the server logs:
+
 ```bash
 # In another terminal
 npm run dev
 # Watch for authentication and API call logs
-``` 
+```
