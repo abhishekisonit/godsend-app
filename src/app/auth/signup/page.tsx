@@ -103,7 +103,7 @@ export default function SignUpPage() {
       router.push(
         '/auth/signin?message=Registration successful! Please sign in.'
       );
-    } catch (error) {
+    } catch {
       setSubmitError('Network error. Please try again.');
     } finally {
       setIsLoading(false);

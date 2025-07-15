@@ -1,11 +1,6 @@
 import { Card } from '@/components/ui';
 import { Box, Text, Heading, Icon, Badge, HStack } from '@chakra-ui/react';
-import {
-  FaCalendarAlt,
-  FaBox,
-  FaMoneyBillWave,
-  FaUser,
-} from 'react-icons/fa';
+import { FaCalendarAlt, FaBox, FaMoneyBillWave, FaUser } from 'react-icons/fa';
 import styles from './RequestCard.module.css';
 
 interface RequestCardProps {

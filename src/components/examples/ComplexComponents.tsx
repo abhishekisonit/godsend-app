@@ -56,7 +56,7 @@ export function ComplexComponentsExample() {
               Box Component
             </Text>
             <Text fontSize="sm" color="gray.600">
-              Chakra's Box component with our design system
+              Chakra&apos;s Box component with our design system
             </Text>
           </Box>
 
