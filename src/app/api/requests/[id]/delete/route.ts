@@ -5,8 +5,9 @@ import { authenticateRequest } from '@/lib/auth-middleware';
 // DELETE /api/requests/[id]/delete - Actually delete request from database
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: any // Temporarily use 'any' to resolve type error
 ) {
+  const { params } = context;
   try {
     // Use the new authentication middleware
     const authenticatedRequest = await authenticateRequest(request);
